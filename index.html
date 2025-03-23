@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat WhatsApp Style</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaeaea;
+      margin: 0;
+      padding: 20px;
+    }
+    #chatBox {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      border: 1px solid #ddd;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+    }
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f8f9fa;
+    }
+    .message {
+      max-width: 70%;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      word-wrap: break-word;
+    }
+    .user {
+      align-self: flex-end;
+      background-color: #daf8cb;
+      text-align: right;
+    }
+    .ai {
+      align-self: flex-start;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    #inputSection {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    #userInput {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    #sendButton {
+      padding: 10px 20px;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #sendButton:hover {
+      background-color: #1da851;
+    }
+  </style>
+</head>
+<body>
+  <div id="chatBox">
+    <div id="messages"></div>
+    <div id="inputSection">
+      <input type="text" id="userInput" placeholder="Tulis pesan Anda di sini">
+      <button id="sendButton">Kirim</button>
+    </div>
+  </div>
+  <script>
+    const messages = document.getElementById('messages');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
+
+    const responses = {
+      "halo ai": "Halo juga! Gimana dengan kabar Anda?",
+      "siapakah pencipta anda": "Yang menciptakan saya ya itu Tuan REDDBLACK.",
+      "tuan REDDBLACK itu siapa": "Siapakah Tuan ku? Anda tidak perlu tahu.",
+      "kenapa si jawab nya gitu": "Saya dirancang untuk tutup mulut siapa saja yang ingin tahu tentang Tuan ku.",
+      "bolehkan saya minta gambaran tuan mu": "Baiklah, saya akan membiarkan bocoran tentang Tuan saya. Tuan saya itu suka dengan lagu yang berjudul 'Rip Love'.",
+      "oke ai terimakasih": "Ya, sama-sama! Sangat senang bisa bertemu dengan Anda."
+    };
+
+    sendButton.addEventListener('click', () => {
+      const userMessage = userInput.value.trim();
+      if (userMessage) {
+        addMessage(userMessage, 'user');
+        const aiResponse = responses[userMessage.toLowerCase()] || "Maaf, saya tidak mengerti pesan Anda.";
+        setTimeout(() => addMessage(aiResponse, 'ai'), 1000);
+        userInput.value = '';
+      }
+    });
+
+    function addMessage(text, sender) {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = text;
+      messageElement.className = `message ${sender}`;
+      messages.appendChild(messageElement);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>
